@@ -1,0 +1,23 @@
+{
+  "name": "eai_node",
+  "version": "1.0.0",
+  "description": "The nodejs server for EmbeddedAI ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solderneer/eai_node.git"
+  },
+  "keywords": [
+    "EmbeddedAI",
+    "node"
+  ],
+  "author": "Isaac Tay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/solderneer/eai_node/issues"
+  },
+  "homepage": "https://github.com/solderneer/eai_node#readme"
+}
