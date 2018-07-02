@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/solderneer/eai_node/issues"
   },
-  "homepage": "https://github.com/solderneer/eai_node#readme"
+  "homepage": "https://github.com/solderneer/eai_node#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
