@@ -13,7 +13,7 @@ var pad = 2;
 var ip = process.env.REDIS_PORT_6379_TCP_ADDR;
 
 var redis = require("redis"),
-    client = redis.createClient({"host":ip});
+    client = redis.createClient({host:ip});
 
 client.on("error", function (err) {
   console.log("Error " + err);
