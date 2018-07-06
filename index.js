@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 var min = 3;
 var pad = 2;
 
-var ip = 'redis://redis';
+var ip = 'redis';
 
 var redis = require("redis"),
     client = redis.createClient({host:ip});
