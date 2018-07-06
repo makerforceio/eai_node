@@ -2,11 +2,11 @@ version: '3'
 services:
     eai_node:
         image: "solderneer/eai_node"
-        port:
+        ports:
          - "3000:3000"
     redis:
         image: "redis"
-        port:
+        ports:
          - "6379:6379"
         volumes: 
          - "redis_data:/data"
