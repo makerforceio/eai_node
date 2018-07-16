@@ -4,7 +4,7 @@ var app = express()
 
 var bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ extended: true}));
 
 var min = 3;
