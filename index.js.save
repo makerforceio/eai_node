@@ -18,7 +18,6 @@ client.on("error", function (err) {
 });
 
 app.get('/init', function (req, res) {
-  console.log("Called - init");
   multi = client.multi();
   for (var i = 0; i < min+1+pad; ++i) {
     multi.llen(i)
@@ -37,7 +36,6 @@ app.get('/init', function (req, res) {
 });
 
 app.post('/put_request', function (req, res) {
-  console.log("Called - put_request");
   if (req.body.key && req.body.params) {
     console.log(req.body.key);
     console.log(req.body.params);
@@ -52,7 +50,6 @@ app.post('/put_request', function (req, res) {
 });
 
 app.post('/get_request', function (req, res) {
-  console.log("Called - get_request");
   if (req.body.key) {
     client.blpop(req.body.key, 0, function (err, reply) {
       res.send(reply[1]);
@@ -61,17 +58,17 @@ app.post('/get_request', function (req, res) {
 });
 
 app.post('/put_answer', function (req, res) {
-  console.log("Called - put_answer");
   if (req.body.params && req.body.gain) {
     client.sadd(req.body.params, req.body.gain);
     client.expire(req.body.params, 300);
     res.send("Whoo!")
   }
-  res.send("Boohoo!");
+  else {
+    res.send("Boohoo!");
+  }
 });
 
 app.post('/get_answers', function (req, res) {
-  console.log("Called - get_answers");
   if (req.body.params) {
     function loop(err, reply) {
       client.expire(req.body.params, 300);
