@@ -10,8 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true}));
 var min = 3;
 var pad = 2;
 
+var ip = 'redis';
+
 var redis = require("redis"),
-    client = redis.createClient();
+    client = redis.createClient({host:ip});
 
 client.on("error", function (err) {
   console.log("Error " + err);
