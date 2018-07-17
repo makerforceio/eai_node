@@ -27,13 +27,17 @@ app.get('/init', function (req, res) {
   }
   multi.exec(function (err, replies) {
     var max_length = 0;
-    var max_list = 0;
+    var max_list = [0];
     for (var i = 0; i < min+1+pad; ++i) {
       if (replies[i] > max_length) {
         max_length = replies[i];
-        max_list = i;
+        max_list = [i];
+      }
+      else if (replies[i] == max_length) {
+        max_list.push(i)
       }
     }
+    max_list = Math.floor(Math.random() * max_list.length);
     res.send("" + max_list);
   });
 });
