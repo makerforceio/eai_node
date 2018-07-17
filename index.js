@@ -86,7 +86,7 @@ app.post('/get_answers', function (req, res) {
         client.scard(req.body.params, loop);
       }
       else if (performance.now() - start_time > 60 * 1000){
-        res.send("Timeout");
+        res.json("Timeout");
       }
       else {
         client.smembers(req.body.params, function (err, reply) {
