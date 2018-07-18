@@ -37,7 +37,7 @@ app.get('/init', function (req, res) {
         max_list.push(i)
       }
     }
-    max_list = Math.floor(Math.random() * max_list.length);
+    max_list = max_list[Math.floor(Math.random() * (max_list.length - 1))];
     res.send("" + max_list);
   });
 });
