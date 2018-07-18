@@ -39,6 +39,7 @@ app.get('/init', function (req, res) {
     }
     max_list = max_list[Math.floor(Math.random() * (max_list.length - 1))];
     res.send("" + max_list);
+    console.log("init sent - " + max_list);
   });
 });
 
@@ -53,6 +54,7 @@ app.post('/put_request', function (req, res) {
       }
     }
     res.send("Yay!");
+    console.log("put_request - Done");
   }
   else {res.send("Neh!");}
 });
@@ -62,6 +64,7 @@ app.post('/get_request', function (req, res) {
   if (req.body.key) {
     client.blpop(req.body.key, 0, function (err, reply) {
       res.send(reply[1]);
+      console.log("get_request - Done");
     });
   }
 });
@@ -71,7 +74,8 @@ app.post('/put_answer', function (req, res) {
   if (req.body.params && req.body.gain) {
     client.sadd(req.body.params, req.body.gain);
     client.expire(req.body.params, 300);
-    res.send("Whoo!")
+    res.send("Whoo!");
+    console.log("put_answer - Done");
   }
   res.send("Boohoo!");
 });
@@ -91,6 +95,7 @@ app.post('/get_answers', function (req, res) {
       else {
         client.smembers(req.body.params, function (err, reply) {
           res.json(reply);
+          console.log("get_answers - Done");
         });
       }
     }
