@@ -5,12 +5,12 @@ var app = express()
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json({ limit: '5mb' }));
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ limit : '5mb', extended: true}));
 
 var min = 3;
 var pad = 2;
 
-var ip = 'redis';
+var ip = 'localhost';
 
 var redis = require("redis"),
     client = redis.createClient({host:ip});
