@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ limit : '5mb', extended: true}));
 var min = 3;
 var pad = 2;
 
-var ip = 'localhost';
+var ip = 'redis';
 
 var redis = require("redis"),
     client = redis.createClient({host:ip});
