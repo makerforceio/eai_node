@@ -83,13 +83,13 @@ app.post('/put_answer', function (req, res) {
 app.post('/get_answers', function (req, res) {
   console.log("Called - get_answers");
   if (req.body.params) {
-    var start_time = performance.now();
+    var start_time = process.hrtime();
     function loop(err, reply) {
       client.expire(req.body.params, 300);
       if (reply < min) {
         client.scard(req.body.params, loop);
       }
-      else if (performance.now() - start_time > 60 * 1000){
+      else if (process.hrtime() - start_time > 60 * 1000){
         res.json("Timeout");
       }
       else {
