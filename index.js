@@ -5,7 +5,7 @@ var app = express()
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json({ limit: '5mb' }));
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ limit : '5mb', extended: true}));
 
 var min = 3;
 var pad = 2;
@@ -27,14 +27,20 @@ app.get('/init', function (req, res) {
   }
   multi.exec(function (err, replies) {
     var max_length = 0;
-    var max_list = 0;
+    var max_list = [0];
     for (var i = 0; i < min+1+pad; ++i) {
       if (replies[i] > max_length) {
         max_length = replies[i];
-        max_list = i;
+        max_list = [i];
+      }
+      else if (replies[i] == max_length) {
+        max_list.push(i)
       }
     }
+    console.log("init found - " + max_list);
+    max_list = max_list[Math.floor(Math.random() * (max_list.length - 1))];
     res.send("" + max_list);
+    console.log("init sent - " + max_list);
   });
 });
 
@@ -49,6 +55,7 @@ app.post('/put_request', function (req, res) {
       }
     }
     res.send("Yay!");
+    console.log("put_request - Done");
   }
   else {res.send("Neh!");}
 });
@@ -58,6 +65,7 @@ app.post('/get_request', function (req, res) {
   if (req.body.key) {
     client.blpop(req.body.key, 0, function (err, reply) {
       res.send(reply[1]);
+      console.log("get_request - Done");
     });
   }
 });
@@ -67,22 +75,28 @@ app.post('/put_answer', function (req, res) {
   if (req.body.params && req.body.gain) {
     client.sadd(req.body.params, req.body.gain);
     client.expire(req.body.params, 300);
-    res.send("Whoo!")
+    res.send("Whoo!");
+    console.log("put_answer - Done");
   }
-  res.send("Boohoo!");
+  else {res.send("Boohoo!")};
 });
 
 app.post('/get_answers', function (req, res) {
   console.log("Called - get_answers");
   if (req.body.params) {
+    var start_time = process.hrtime();
     function loop(err, reply) {
       client.expire(req.body.params, 300);
       if (reply < min) {
         client.scard(req.body.params, loop);
       }
+      else if (process.hrtime() - start_time > 60 * 1000){
+        res.json("Timeout");
+      }
       else {
         client.smembers(req.body.params, function (err, reply) {
           res.json(reply);
+          console.log("get_answers - Done");
         });
       }
     }
