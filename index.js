@@ -37,6 +37,7 @@ app.get('/init', function (req, res) {
         max_list.push(i)
       }
     }
+    console.log("init found - " + max_list);
     max_list = max_list[Math.floor(Math.random() * (max_list.length - 1))];
     res.send("" + max_list);
     console.log("init sent - " + max_list);
