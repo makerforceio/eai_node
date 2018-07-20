@@ -77,7 +77,7 @@ app.post('/put_answer', function (req, res) {
     res.send("Whoo!");
     console.log("put_answer - Done");
   }
-  res.send("Boohoo!");
+  else {res.send("Boohoo!")};
 });
 
 app.post('/get_answers', function (req, res) {
