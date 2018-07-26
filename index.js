@@ -68,6 +68,7 @@ app.post('/get_request', function (req, res) {
       console.log("get_request - Done");
     });
   }
+  else {res.send("No key found");}
 });
 
 app.post('/put_answer', function (req, res) {
