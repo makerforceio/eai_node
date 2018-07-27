@@ -23,9 +23,10 @@ app.get('/init', function (req, res) {
   console.log("Called - init");
   multi = client.multi();
   for (var i = 0; i < min+1+pad; ++i) {
-    multi.llen(i)
+    multi.llen(i);
   }
   multi.exec(function (err, replies) {
+    console.log("init - multi enter");
     var max_length = 0;
     var max_list = [0];
     for (var i = 0; i < min+1+pad; ++i) {
