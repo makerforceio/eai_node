@@ -16,7 +16,7 @@ var redis = require("redis"),
     client = redis.createClient({host:ip});
 
 client.on("error", function (err) {
-  console.log("Error " + err);
+  console.log("Error ", err);
 });
 
 app.get('/init', function (req, res) {
