@@ -48,8 +48,6 @@ app.get('/init', function (req, res) {
 app.post('/put_request', function (req, res) {
   console.log("Called - put_request");
   if (req.body.key && req.body.params) {
-    console.log(req.body.key);
-    console.log(req.body.params);
     for (var i = 0; i < min+1+pad; ++i) {
       if ("" + i != req.body.key) {
         client.rpush(i, req.body.params);
